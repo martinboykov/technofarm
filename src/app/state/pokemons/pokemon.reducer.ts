@@ -7,44 +7,42 @@ import {
 } from './pokemon.actions';
 import { Pokemon } from '../../models/pokemon.model';
 
-export type Status = 'pending' | 'loading' | 'error' | 'success';
-
 export interface PokemonState {
   pokemons: Pokemon[];
   error: string | null;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  isLoading: boolean;
 }
 
 export const initialState: PokemonState = {
   pokemons: [],
   error: null,
-  status: 'pending',
+  isLoading: false,
 };
 
 export const pokemonReducer = createReducer(
   initialState,
-  on(loadPokemons, (state) => ({ ...state, status: 'loading' as Status })),
+  on(loadPokemons, (state) => ({ ...state, isLoading: true })),
   on(loadPokemonsSuccess, (state, { pokemons }) => ({
     ...state,
     pokemons: pokemons,
     error: null,
-    status: 'success' as Status,
+    isLoading: false,
   })),
   on(loadPokemonsFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error' as Status,
+    isLoading: false,
   })),
   on(savePokemons, (state, { pokemon }) => ({
     ...state,
     pokemons: [
-      ...[...state.pokemons].map((p) => {
-        if(p.id === pokemon.id){
-          return {...pokemon};
+      ...state.pokemons.map((p) => {
+        if (p.id === pokemon.id) {
+          return { ...pokemon };
         } else {
           return p;
         }
-      }) ,
+      }),
     ],
   }))
 );

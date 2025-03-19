@@ -10,10 +10,7 @@ ol {
 }
 
 button {
-  // background-color: var(--ant-primary-1);
-  // border: 1px solid var(--ant-primary-color);
-  // border-radius: 4px;
-  // padding: 3px 12px;
+
   cursor: pointer;
   &:hover {
     background-color: var(--ant-primary-2);
@@ -22,16 +19,4 @@ button {
   &:focus {
     background-color: var(--ant-primary-3);
   }
-  // &.save {
-  //   background-color: var(--ant-success-color);
-  //   border-color: var(--ant-success-color-outline);
-  //   color: white;
-  //   &:hover {
-  //     background-color: var(--ant-success-color-hover);
-  //   }
-  //   &:active,
-  //   &:focus {
-  //     background-color: var(--ant-success-color-active);
-  //   }
-  // }
 }

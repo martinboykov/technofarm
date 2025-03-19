@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-// import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -10,6 +9,8 @@ import { AppState } from './state/app.state';
 import { selectAllPokemons } from './state/pokemons/pokemon.selectors';
 import { Pokemon } from './models/pokemon.model';
 import { loadPokemons } from './state/pokemons/pokemon.actions';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,11 +19,12 @@ import { loadPokemons } from './state/pokemons/pokemon.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'technofarm';
+  private destroyedRef = inject(DestroyRef);
   constructor(private store: Store<AppState>) {
-    this.store.select<Pokemon[]>(selectAllPokemons).subscribe((state) => {
-
-    });
+    this.store
+      .select<Pokemon[]>(selectAllPokemons)
+      .pipe(takeUntilDestroyed(this.destroyedRef))
+      .subscribe();
   }
   ngOnInit() {
     this.store.dispatch(loadPokemons());

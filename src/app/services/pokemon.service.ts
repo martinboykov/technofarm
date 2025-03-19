@@ -25,9 +25,7 @@ export class PokemonService {
     return from(this.storageService.getItem('pokemons')).pipe(
       take(1),
       switchMap((pokemons) => {
-        console.log('🚀 ~ PokemonService ~ tap ~ pokemons:', pokemons);
         if (!pokemons) {
-          console.log('🚀 ~ PokemonService ~ tap ~ pokemons:', pokemons);
           return this.dataService.getPokemons().pipe(
             switchMap((pokemonsList) => {
               if (!pokemonsList) return from([]);
@@ -38,8 +36,10 @@ export class PokemonService {
                 )
               ).pipe(
                 map((result) => {
-                  console.log('Final Object', result);
-                  this.storageService.setItem('pokemons', Object.values(result));
+                  this.storageService.setItem(
+                    'pokemons',
+                    Object.values(result)
+                  );
                   return Object.values(result);
                 })
               );
@@ -49,27 +49,6 @@ export class PokemonService {
         return of(pokemons);
       })
     );
-    // switchMap((pokemons) => {
-    //   if (!pokemons) {
-    //     return this.dataService.getPokemons().pipe(
-    //       switchMap((pokemonsList) => {
-    //         if (!pokemonsList) return from([]);
-    //         if (!pokemonsList.results) return from([]);
-    //         return forkJoin(
-    //           pokemonsList.results.map((pokemon) =>
-    //             this.dataService.getPokemonByName(pokemon.name)
-    //           )
-    //         ).pipe(
-    //           map((result) => {
-    //             console.log('Final Object', result);
-    //             return Object.values(result);
-    //           })
-    //         );
-    //       })
-    //     );
-    //   }
-    //   return (pokemons);
-    // })
   }
 
   async savePokemons(pokemons: Pokemon[]) {

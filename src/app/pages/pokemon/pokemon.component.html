@@ -1,4 +1,4 @@
-<ng-container *ngIf="pokemon && pokemon.id">
+<ng-container *ngIf="pokemon">
   <nz-content>
     <nz-page-header (nzBack)="onBack()"
                     nzBackIcon>
@@ -25,7 +25,6 @@
                     nzShape="round"
                     nzType="primary"
                     nzSize="large"
-                    nzLoading="{{loading}}"
                     (click)="onSave()">
               <span nz-icon
                     [nzType]="'save'"

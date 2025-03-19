@@ -1,16 +1,16 @@
 <nz-content>
   <nz-list class="custom"
            nzItemLayout="horizontal"
-           [nzDataSource]="pokemons"
+           [nzDataSource]="(pokemons$ | async)?? []"
            [nzRenderItem]="item"
-           [nzLoading]="loading">
+           [nzLoading]="loading$ |  async">
     <ng-template #item
                  let-item>
 
       <nz-list-item [routerLink]="['/pokemon/' + item.id]"
-                    [nzContent]="loading ? ' ' : content"
+                    [nzContent]="(loading$ |  async) ? ' ' : content"
                     routerLinkActive="router-link-active">
-        <nz-skeleton [nzLoading]="loading"
+        <nz-skeleton [nzLoading]="(loading$ |  async)?? false"
                      [nzActive]="true"
                      [nzAvatar]="true">
 

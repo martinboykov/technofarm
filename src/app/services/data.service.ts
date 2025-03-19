@@ -23,21 +23,6 @@ export class DataService {
   private http: HttpClient = inject(HttpClient);
   constructor() {}
   getPokemons() {
-    // const data$ = Observable.create((observer: {name: string, url: string}[]) => {
-    //   fetch(`${URL}/pokemon?limit=10&offset=0`)
-    //     .then(response => response.json()) // or text() or blob() etc.
-    //     .then(data => {
-    //       observer.next(data);
-    //       observer.complete();
-    //     })
-    //     .catch(err => observer.error(err));
-    // });
-    // // return this.http.get<Pokemon[]>(`${URL}/pokemons?limit=10&offset=0`);
-    // return data$;
-    // fetch("https://pokeapi.co/api/v2/pokemon/28/").then(results => { return results.json();
-    // }).then(data => {
-    //     console.log(data);
-    // })
     return this.http.get<PokemonListResponse>(
       `${URL}/pokemon?limit=10&offset=0`
     );

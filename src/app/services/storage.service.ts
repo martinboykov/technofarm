@@ -19,14 +19,6 @@ export class StorageService {
   }
 
   async setItem(key: string, item: any) {
-    console.log(
-      '🚀 ~ file: storage.service.ts:22 ~ StorageService ~ setItem ~ key:',
-      key,
-    );
-    console.log(
-      '🚀 ~ file: storage.service.ts:22 ~ StorageService ~ setItem ~ item:',
-      item,
-    );
     return await this.storage.set(key, item);
   }
 

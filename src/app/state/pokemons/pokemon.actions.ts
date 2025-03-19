@@ -14,7 +14,7 @@ export const loadPokemonsFailure = createAction(
 );
 
 export const savePokemons = createAction(
-  '[Pokemon Page] Save Pokemon',
+  '[Pokemon Page] Save Pokemons',
   props<{ pokemon: Pokemon }>()
 );
 
