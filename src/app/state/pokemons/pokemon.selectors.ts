@@ -7,3 +7,7 @@ export const selectAllPokemons = createSelector(
   selectPokemons,
   (state: PokemonState) => state.pokemons
 );
+export const selectPokemonById = (id: number) =>
+  createSelector(selectPokemons, (state: PokemonState) =>
+    state.pokemons.filter((p) => p.id == id)[0]
+  );

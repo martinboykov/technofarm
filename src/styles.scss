@@ -95,6 +95,10 @@
 .ant-descriptions-bordered .ant-descriptions-item-label {
   background-color: var(--ant-primary-1);
 }
+.ant-descriptions-item-content,
+.ant-descriptions-item-label {
+  vertical-align: top;
+}
 
 .container {
   width: 100%;

@@ -38,9 +38,9 @@ export const pokemonReducer = createReducer(
   on(savePokemons, (state, { pokemon }) => ({
     ...state,
     pokemons: [
-      ...state.pokemons.map((p) => {
+      ...[...state.pokemons].map((p) => {
         if(p.id === pokemon.id){
-          return pokemon;
+          return {...pokemon};
         } else {
           return p;
         }

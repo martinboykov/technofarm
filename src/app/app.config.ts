@@ -26,6 +26,7 @@ import {
 } from './state/pokemons/pokemon.effects';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ArrowLeftOutline, FormOutline, SaveOutline } from '@ant-design/icons-angular/icons';
+import { IonicStorageModule } from '@ionic/storage-angular';
 const icons: IconDefinition[] = [FormOutline, ArrowLeftOutline, SaveOutline];
 
 
@@ -36,10 +37,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
-    // importProvidersFrom(
-    //   IonicModule.forRoot(),
-    //   IonicStorageModule.forRoot({ storeName: 'technofarm' })
-    // ),
+    importProvidersFrom(
+      IonicStorageModule.forRoot({ storeName: 'technofarm' })
+    ),
     provideNzI18n(en_US),
     importProvidersFrom(FormsModule),
     importProvidersFrom(NzIconModule.forRoot(icons)),
@@ -51,7 +51,6 @@ export const appConfig: ApplicationConfig = {
     //   maxAge: 25, // Retains last 25 states
     //   logOnly: false, // Restrict extension to log-only mode
     // })
-    // provideStore({ pokemons: pokemonReducer }),
-    // provideEffects({ effects: [loadPokemons$] }),
+
   ],
 };
