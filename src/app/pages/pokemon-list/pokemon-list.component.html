@@ -1,0 +1,28 @@
+<nz-content>
+  <nz-list class="custom"
+           nzItemLayout="horizontal"
+           [nzDataSource]="pokemons"
+           [nzRenderItem]="item"
+           [nzLoading]="loading">
+    <ng-template #item
+                 let-item>
+
+      <nz-list-item [routerLink]="['/pokemon/' + item.id]"
+                    [nzContent]="loading ? ' ' : content"
+                    routerLinkActive="router-link-active">
+        <nz-skeleton [nzLoading]="loading"
+                     [nzActive]="true"
+                     [nzAvatar]="true">
+
+          <ng-template #content>
+            <nz-list-item-meta nzAvatar="{{item.sprites.front_default}}">
+              <nz-list-item-meta-title>
+                <span>{{ item.species.name }}</span>
+              </nz-list-item-meta-title>
+            </nz-list-item-meta>
+          </ng-template>
+        </nz-skeleton>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+</nz-content>

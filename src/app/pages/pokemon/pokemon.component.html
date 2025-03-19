@@ -1,0 +1,126 @@
+<nz-content>
+  <nz-page-header (nzBack)="onBack()"
+                  nzBackIcon>
+    <nz-page-header-title>
+      <ng-container *ngIf="editMode"
+                    #edit>
+        <input nz-input
+               placeholder="Name"
+               [(ngModel)]="pokemon.species.name"
+               type="text" />
+      </ng-container>
+      <ng-template #edit>
+        {{pokemon.species.name}}
+      </ng-template>
+
+    </nz-page-header-title>
+  </nz-page-header>
+  <div class="container"
+       nz-flex
+       nzVertical="center">
+    <img nz-image
+         nzDisablePreview="true"
+         nzSrc="{{pokemon.sprites.front_default}}"
+         [nzFallback]="fallback"
+         alt="pokemon image">
+    <nz-descriptions nzBordered>
+      <nz-descriptions-item nzSpan="2"
+                            nzTitle="Weight">
+        <ng-container *ngIf="editMode"
+                      #edit1>
+          <input nz-input
+                 placeholder="Basic usage"
+                 [(ngModel)]="pokemon.weight"
+                 type="number" />
+        </ng-container>
+        <ng-template #edit1>
+          {{pokemon.weight}}
+        </ng-template>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzSpan="2"
+                            nzTitle="Height">
+
+        <ng-container *ngIf="editMode"
+                      #edit2>
+          <input nz-input
+                 placeholder="Basic usage"
+                 [(ngModel)]="pokemon.height"
+                 type="number" />
+        </ng-container>
+        <ng-template #edit2>
+          {{pokemon.height}}
+        </ng-template>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzSpan="2"
+                            nzTitle="Abilities">
+        <ol>
+          <ng-container *ngFor="let item of pokemon.abilities">
+            <ng-container *ngIf="editMode"
+                          #edit3>
+              <li>
+                <input nz-input
+                       placeholder="Ability"
+                       [(ngModel)]="item.ability.name"
+                       type="text" />
+              </li>
+            </ng-container>
+            <ng-template #edit3>
+              <li> {{item.ability.name}}</li>
+            </ng-template>
+          </ng-container>
+        </ol>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzSpan="2"
+                            nzTitle="Moves">
+        <ol>
+          <ng-container *ngFor="let item of pokemon.moves">
+            <ng-container *ngIf="editMode"
+                          #edit4>
+              <li>
+                <input nz-input
+                       placeholder="Move"
+                       [(ngModel)]="item.move.name"
+                       type="text" />
+              </li>
+            </ng-container>
+            <ng-template #edit4>
+              <li> {{item.move.name}}</li>
+            </ng-template>
+          </ng-container>
+        </ol>
+
+      </nz-descriptions-item>
+    </nz-descriptions>
+    <div nz-flex
+         nzAlign="end"
+         nzJustify="end">
+      <ng-container *ngIf="editMode"
+                    #edit5>
+        <button class="save"
+                nz-button
+                nzShape="round"
+                nzType="primary"
+                nzSize="large"
+                nzLoading="{{loading}}"
+                (click)="onSave()">
+          <span nz-icon
+                [nzType]="'save'"
+                [nzTheme]="'outline'"></span>
+          Save
+        </button>
+      </ng-container>
+      <ng-template #edit5>
+        <button nz-button
+                nzShape="round"
+                nzSize="large"
+                (click)="editMode = !editMode">
+          <span nz-icon
+                [nzType]="'form'"
+                [nzTheme]="'outline'"></span>
+          Edit
+        </button>
+      </ng-template>
+    </div>
+  </div>
+
+</nz-content>
