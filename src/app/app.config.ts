@@ -11,7 +11,7 @@ import {
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-
+import { IconDefinition } from '@ant-design/icons-angular';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -24,6 +24,9 @@ import {
   loadPokemons$,
   PokemonEffects,
 } from './state/pokemons/pokemon.effects';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ArrowLeftOutline, FormOutline, SaveOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [FormOutline, ArrowLeftOutline, SaveOutline];
 
 
 registerLocaleData(en);
@@ -39,7 +42,7 @@ export const appConfig: ApplicationConfig = {
     // ),
     provideNzI18n(en_US),
     importProvidersFrom(FormsModule),
-    // importProvidersFrom(NzIconModule.forRoot()),
+    importProvidersFrom(NzIconModule.forRoot(icons)),
     importProvidersFrom(
       StoreModule.forRoot({ pokemons: pokemonReducer }),
       EffectsModule.forRoot([PokemonEffects])

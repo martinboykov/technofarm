@@ -2,52 +2,56 @@
   <nz-page-header (nzBack)="onBack()"
                   nzBackIcon>
     <nz-page-header-title>
-      <ng-container *ngIf="editMode"
-                    #edit>
+      <ng-container *ngIf="editMode; then nameEdit else name">
+      </ng-container>
+      <ng-template #nameEdit>
         <input nz-input
                placeholder="Name"
                [(ngModel)]="pokemon.species.name"
                type="text" />
-      </ng-container>
-      <ng-template #edit>
+      </ng-template>
+      <ng-template #name>
         {{pokemon.species.name}}
       </ng-template>
 
     </nz-page-header-title>
   </nz-page-header>
-  <div class="container"
-       nz-flex
-       nzVertical="center">
+  <div class="container flex flex-column gap-2">
     <img nz-image
          nzDisablePreview="true"
          nzSrc="{{pokemon.sprites.front_default}}"
          [nzFallback]="fallback"
+         width="150"
+         height="150"
          alt="pokemon image">
     <nz-descriptions nzBordered>
       <nz-descriptions-item nzSpan="2"
                             nzTitle="Weight">
-        <ng-container *ngIf="editMode"
-                      #edit1>
+        <ng-container *ngIf="editMode; then weightEdit else weight "> </ng-container>
+        <ng-template #weightEdit>
           <input nz-input
-                 placeholder="Basic usage"
+                 placeholder="Weight"
                  [(ngModel)]="pokemon.weight"
                  type="number" />
-        </ng-container>
-        <ng-template #edit1>
+        </ng-template>
+        <ng-template #weight>
           {{pokemon.weight}}
         </ng-template>
       </nz-descriptions-item>
       <nz-descriptions-item nzSpan="2"
                             nzTitle="Height">
 
-        <ng-container *ngIf="editMode"
-                      #edit2>
+        <ng-container *ngIf="editMode;then heightEdit else height">
+
+        </ng-container>
+
+        <ng-template #heightEdit>
           <input nz-input
-                 placeholder="Basic usage"
+                 placeholder="Hight"
                  [(ngModel)]="pokemon.height"
                  type="number" />
-        </ng-container>
-        <ng-template #edit2>
+        </ng-template>
+        <ng-template #height>
           {{pokemon.height}}
         </ng-template>
       </nz-descriptions-item>
@@ -55,16 +59,18 @@
                             nzTitle="Abilities">
         <ol>
           <ng-container *ngFor="let item of pokemon.abilities">
-            <ng-container *ngIf="editMode"
-                          #edit3>
+            <ng-container *ngIf="editMode; then templateAbilityEdit; else templateMoveB">
+
+            </ng-container>
+            <ng-template #templateAbilityEdit>
               <li>
                 <input nz-input
                        placeholder="Ability"
                        [(ngModel)]="item.ability.name"
                        type="text" />
               </li>
-            </ng-container>
-            <ng-template #edit3>
+            </ng-template>
+            <ng-template #templateMoveB>
               <li> {{item.ability.name}}</li>
             </ng-template>
           </ng-container>
@@ -74,16 +80,17 @@
                             nzTitle="Moves">
         <ol>
           <ng-container *ngFor="let item of pokemon.moves">
-            <ng-container *ngIf="editMode"
-                          #edit4>
+            <ng-container *ngIf="editMode; then templateMoveEdit else templateMove">
+            </ng-container>
+            <ng-template #templateMoveEdit>
               <li>
                 <input nz-input
                        placeholder="Move"
                        [(ngModel)]="item.move.name"
                        type="text" />
               </li>
-            </ng-container>
-            <ng-template #edit4>
+            </ng-template>
+            <ng-template #templateMove>
               <li> {{item.move.name}}</li>
             </ng-template>
           </ng-container>
@@ -91,11 +98,9 @@
 
       </nz-descriptions-item>
     </nz-descriptions>
-    <div nz-flex
-         nzAlign="end"
-         nzJustify="end">
-      <ng-container *ngIf="editMode"
-                    #edit5>
+    <div class="flex justify-end">
+      <ng-container *ngIf="editMode; then templateButtonEdit; else templateButton"></ng-container>
+      <ng-template #templateButtonEdit>
         <button class="save"
                 nz-button
                 nzShape="round"
@@ -108,8 +113,9 @@
                 [nzTheme]="'outline'"></span>
           Save
         </button>
-      </ng-container>
-      <ng-template #edit5>
+      </ng-template>
+
+      <ng-template #templateButton>
         <button nz-button
                 nzShape="round"
                 nzSize="large"

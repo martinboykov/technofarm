@@ -1,19 +1,14 @@
 <nz-layout>
-  <nz-header nz-flex
-             nzJustify="center">
-      <div class="logo"
-           nz-flex
-           nzJustify="center"
-           nzAlign="center"
-           [routerLink]="['/']">
-        <img src="/assets/images/logo.svg"
-             width="100"
-             height="50"
-             alt="logo">
-      </div>
+  <nz-header class="flex justify-center">
+    <div class="logo"
+         [routerLink]="['/']">
+      <img src="/assets/images/logo.svg"
+           width="100"
+           height="50"
+           alt="logo">
+    </div>
   </nz-header>
   <nz-content>
     <router-outlet />
-
   </nz-content>
 </nz-layout>

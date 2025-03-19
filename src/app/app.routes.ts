@@ -5,19 +5,19 @@ import { PokemonListComponent } from './pages/pokemon-list/pokemon-list.componen
 export const routes: Routes = [
   {
     path: 'home',
-    component: PokemonListComponent,
-    // loadComponent: () =>
-    //   import('./pages/pokemon-list/pokemon-list.component').then(
-    //     (m) => m.PokemonListComponent
-    //   ),
+    // component: PokemonListComponent,
+    loadComponent: () =>
+      import('./pages/pokemon-list/pokemon-list.component').then(
+        (m) => m.PokemonListComponent
+      ),
   },
   {
     path: 'pokemon/:id',
-    component: PokemonComponent,
-    // loadComponent: () =>
-    //   import('./pages/pokemon/pokemon.component').then(
-    //     (m) => m.PokemonComponent
-    //   ),
+    // component: PokemonComponent,
+    loadComponent: () =>
+      import('./pages/pokemon/pokemon.component').then(
+        (m) => m.PokemonComponent
+      ),
   },
   {
     path: '',

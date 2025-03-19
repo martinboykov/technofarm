@@ -564,13 +564,13 @@ export class PokemonListComponent {
   pokemons!: Pokemon[];
 
   constructor(private store: Store<AppState>) {
-    // this.store.select<Pokemon[]>(selectAllPokemons).subscribe((state) => {
-    //   this.pokemons = [...state];
-    //   this.loading = false;
-    // });
+    this.store.select<Pokemon[]>(selectAllPokemons).subscribe((state) => {
+      this.pokemons = [...state];
+      this.loading = false;
+    });
   }
   ngOnInit() {
     // this.dataSource = [...this.pokemon];
-    // this.store.dispatch(loadPokemons());
+    this.store.dispatch(loadPokemons());
   }
 }
